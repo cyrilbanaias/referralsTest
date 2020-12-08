@@ -29,19 +29,9 @@ public class BrowserSteps {
         DriverManager.getDriver().driver.get(DataManager.getData().returnParam(url));
         DriverManager.getDriver().driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         DriverManager.getDriver().driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-        if (CapabilitiesManager.getCapabilities().capabilities.getCapability("platformName").toString().equals("new_edge")
-                || CapabilitiesManager.getCapabilities().capabilities.getCapability("platformName").toString().equals("edge")
-                || CapabilitiesManager.getCapabilities().capabilities.getCapability("platformName").toString().equals("ie")){
-            DriverManager.getDriver().driver.manage().deleteAllCookies();
-        }
         if (!CapabilitiesManager.getCapabilities().capabilities.getCapability("platformName").toString().equals("android_web")
                 && !CapabilitiesManager.getCapabilities().capabilities.getCapability("platformName").toString().equals("ios_web")){
             DriverManager.getDriver().driver.manage().window().setSize(new Dimension(1920,1080));
-        }
-        if (CapabilitiesManager.getCapabilities().capabilities.getCapability("platformName").toString().equals("chrome")
-            || CapabilitiesManager.getCapabilities().capabilities.getCapability("platformName").toString().equals("new_edge")){
-            DriverManager.getDriver().driver.findElement(By.id("details-button")).click();
-            DriverManager.getDriver().driver.findElement(By.id("proceed-link")).click();
         }
         Thread.sleep(5000);
     }

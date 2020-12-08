@@ -16,8 +16,8 @@ import java.io.File;
 @CucumberOptions(
 		plugin = { "html:target/report/edge", "json:target/json/edge/reportEdge.json"},
 		strict = true,
-		features = {"src/test/resources/scenarios/desktop/"},
-		tags ={"@referrals"}
+		features = {"src/test/resources/scenarios/desktop/"}//,
+		//tags ={"@referrals"}
 )
 
 /**

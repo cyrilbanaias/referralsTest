@@ -16,8 +16,8 @@ import java.io.File;
 @CucumberOptions(
 		plugin = { "html:target/report/chrome", "json:target/json/chrome/reportChrome.json"},
 		strict = true,
-		features = {"src/test/resources/scenarios/desktop/"},
-		tags ={"@referrals"}
+		features = {"src/test/resources/scenarios/desktop/"}//,
+		//tags ={"@referrals"}
 )
 
 /**

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="STAJ" parallel="tests" thread-count="10">
+    <test name="android">
+        <parameter name="platform" value="android_web"/>
+        <parameter name="deviceName" value="Google Pixel 3"/>
+        <parameter name="udid" value="1f8155f7"/>
+        <parameter name="platformVersion" value="9.0"/>
+        <parameter name="os" value=""/>
+        <classes>
+            <class name="com.niji.TestAndroid"/>
+        </classes>
+    </test>
+</suite>
+<!--suite name="STAJ" parallel="tests" thread-count="10">
+    <test name="android">
+        <parameter name="platform" value="android_web"/>
+        <parameter name="deviceName" value="SM-G530FZ"/>
+        <parameter name="udid" value="1f8155f7"/>
+        <parameter name="platformVersion" value="5.0.2"/>
+        <parameter name="os" value=""/>
+        <classes>
+            <class name="com.niji.TestAndroid"/>
+        </classes>
+    </test>
+</suite-->

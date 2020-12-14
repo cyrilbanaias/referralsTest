@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MonInter-Desktop" parallel="tests" thread-count="10">
+    <test name="chrome">
+        <parameter name="platform" value="chrome"/>
+        <parameter name="os" value="linux"/>
+        <classes>
+            <class name="com.niji.TestChrome"/>
+        </classes>
+    </test>
+    <test name="firefox">
+        <parameter name="platform" value="firefox"/>
+        <parameter name="os" value="linux"/>
+        <classes>
+            <class name="com.niji.TestFirefox"/>
+        </classes>
+    </test>
+</suite>

@@ -37,6 +37,15 @@ public class DataClass {
     public String language = "";
     public String account_type = "";
     public String account_settings = "";
+    public String existing_client = "";
+
+    public String company_number = "";
+    public String company_name = "";
+    public String client_informations = "";
+    public String client_email = "";
+    // Project / Project deadline / Funding mode / Fleet size / Vehicle Model / Contract Duration / Trigger Event / Annual mileage / Details
+    public ArrayList<String> leadInformations = new ArrayList<>();
+    public ArrayList<String> existingOffer = new ArrayList<>();
 
     public void initialize() {
     }

@@ -1,18 +1,21 @@
 package com.niji.steps.globalSteps;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import com.niji.data.DataManager;
 import com.niji.factory.CapabilitiesManager;
 import com.niji.factory.DriverManager;
+import com.niji.pageObjects.LeadCreationPage;
+import com.niji.utils.NewBy;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.Given;
-import org.openqa.selenium.By;
+import org.openqa.selenium.*;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -84,8 +87,30 @@ public class BrowserSteps {
             DataManager.getData().errorCollector.addError(new Exception("No new tab has been opened."));
         } else {
             DriverManager.getDriver().driver.switchTo().window(tabs2.get(1));
+            GenericSteps.screenShot();
             DriverManager.getDriver().driver.close();
             DriverManager.getDriver().driver.switchTo().window(tabs2.get(0));
+        }
+    }
+
+    public static void checkNewPrintTab() throws Exception {
+        Thread.sleep(5000);
+        ArrayList<String> tabs2 = new ArrayList<String> (DriverManager.getDriver().driver.getWindowHandles());
+        if(tabs2.size() == 1){
+            DataManager.getData().errorCollector.addError(new Exception("No new tab has been opened."));
+        } else {
+            if(CapabilitiesManager.getCapabilities().capabilities.getCapability("platformName").toString().equals("chrome")){
+                DriverManager.getDriver().driver.switchTo().window(tabs2.get(1));
+                GenericSteps.screenShot();
+                JavascriptExecutor executor = (JavascriptExecutor) DriverManager.getDriver().driver;
+                executor.executeScript("return document.querySelector('print-preview-app').shadowRoot.querySelector('print-preview-sidebar').shadowRoot.querySelector('print-preview-button-strip').shadowRoot.querySelector('cr-button.cancel-button').click();");
+                DriverManager.getDriver().driver.switchTo().window(tabs2.get(0));
+            } else {
+                GenericSteps.screenShot();
+                Robot r = new Robot();
+                r.keyPress(KeyEvent.VK_ESCAPE);
+                r.keyRelease(KeyEvent.VK_ESCAPE);
+            }
         }
     }
 

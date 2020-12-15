@@ -71,6 +71,7 @@ public class ConnectionSteps {
                 accounts.remove(account);
                 DriverManager.getDriver().scenario.write(account.get(2));
                 DataManager.getData().account_settings = account.get(1);
+                DataManager.getData().existing_client = account.get(4);
                 login(account.get(2), account.get(3));
                 checkIfConnected();
                 connected = true;

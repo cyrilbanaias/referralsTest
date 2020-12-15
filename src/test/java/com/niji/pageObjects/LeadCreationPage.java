@@ -28,6 +28,22 @@ public class LeadCreationPage {
         return DriverManager.getDriver().driver.findElements(By.name("octopusOffer"));
     }
 
+    public static WebElement getOctopusOfferTitle(WebElement octopusOffer){
+        return octopusOffer.findElement(By.xpath("./div/h4"));
+    }
+
+    public static WebElement getOctopusOfferModel(WebElement octopusOffer){
+        return octopusOffer.findElements(By.xpath("./div/p")).get(0);
+    }
+
+    public static WebElement getOctopusOfferPrice(WebElement octopusOffer){
+        return octopusOffer.findElement(By.xpath("./div/p/span"));
+    }
+
+    public static WebElement getOctopusOfferContractDetails(WebElement octopusOffer){
+        return octopusOffer.findElements(By.xpath("./div/p")).get(2);
+    }
+
     public static WebElement getPersonnalOfferLink(){
         return getOfferBlockELement().findElement(By.xpath(".//a[not(@name=\"octopusOffer\")]"));
     }
@@ -129,15 +145,6 @@ public class LeadCreationPage {
         return DriverManager.getDriver().driver.findElement(By.id("thirdParty_mngmntRatingsId"));
     }
 
-
-
-
-
-
-
-
-
-
     // Client Contact
     public static WebElement getClientLanguageSelectList(){
         return DriverManager.getDriver().driver.findElement(By.id("thirdParty_languagesId"));
@@ -176,28 +183,36 @@ public class LeadCreationPage {
     }
 
     // Client's need
+    public static WebElement getClientNeedBlockELement(){
+        return DriverManager.getDriver().driver.findElement(By.xpath("//*[@data-icon=\"comment-alt-smile\"]/../../.."));
+    }
+
     public static WebElement getASAPRadioButton(){
-        return DriverManager.getDriver().driver.findElement(NewBy.forAttribute("ecallsId_1"));
+        return DriverManager.getDriver().driver.findElement(NewBy.forAttribute("recallsId_1"));
     }
 
     public static WebElement getAppointmentRadioButton(){
         return DriverManager.getDriver().driver.findElement(NewBy.forAttribute("recallsId_2"));
     }
 
-    public static WebElement getProjectSelectList(){
-        return DriverManager.getDriver().driver.findElement(By.id("projectsId"));
-    }
-
     public static WebElement getProjectDeadLineSelectList(){
         return DriverManager.getDriver().driver.findElement(By.id("deadlinesId"));
+    }
+
+    public static WebElement getAppointmentDateButton(){
+        return DriverManager.getDriver().driver.findElement(By.xpath("//*[@id=\"recallDate\"]/..//*[@data-icon=\"calendar-alt\"]/../.."));
+    }
+
+    public static WebElement getAppointmentDateField(){
+        return DriverManager.getDriver().driver.findElement(By.xpath("//*[@id=\"recallDate\"]"));
     }
 
     public static WebElement getFundingModelSelectList(){
         return DriverManager.getDriver().driver.findElement(By.id("fundmodesId"));
     }
 
-    public static WebElement getTriggerEventSelectList(){
-        return DriverManager.getDriver().driver.findElement(By.id("eventsId"));
+    public static WebElement getProjectSelectList(){
+        return DriverManager.getDriver().driver.findElement(By.id("projectsId"));
     }
 
     public static WebElement getFleetSizeInputField(){
@@ -212,15 +227,48 @@ public class LeadCreationPage {
         return DriverManager.getDriver().driver.findElement(By.id("contractDurationsId"));
     }
 
+    public static WebElement getTriggerEventSelectList(){
+        return DriverManager.getDriver().driver.findElement(By.id("eventsId"));
+    }
+
     public static WebElement getAnnualMileageInputField(){
         return DriverManager.getDriver().driver.findElement(By.id("annualMileage"));
+    }
+
+    public static WebElement getMileageAllowanceYesRadioButton(){
+        return DriverManager.getDriver().driver.findElement(By.id("kilometricIndemnitiesId_1"));
+    }
+
+    public static WebElement getMileageAllowanceNoRadioButton(){
+        return DriverManager.getDriver().driver.findElement(By.id("kilometricIndemnitiesId_2"));
+    }
+
+    public static WebElement getMoreDetailsField(){
+        return DriverManager.getDriver().driver.findElement(By.id("description"));
     }
 
     public static WebElement getUploadDocumentButton(){
         return DriverManager.getDriver().driver.findElement(By.id("fileDropRef"));
     }
 
+    // GDPR, Prind, Send
     public static WebElement getGDPRCheckBox(){
         return DriverManager.getDriver().driver.findElement(NewBy.forAttribute("rgpd"));
+    }
+
+    public static WebElement getSendLinkButton(){
+        return DriverManager.getDriver().driver.findElement(NewBy.jhitranslate("lead.send.privacypolicy.title"));
+    }
+
+    public static WebElement getConfidentialiteCheckbox(){
+        return DriverManager.getDriver().driver.findElement(NewBy.forAttribute("confidentialite"));
+    }
+
+    public static WebElement getPrintButton(){
+        return DriverManager.getDriver().driver.findElement(NewBy.jhitranslate("lead.send.print"));
+    }
+
+    public static WebElement getSendButton(){
+        return DriverManager.getDriver().driver.findElement(NewBy.jhitranslate("lead.send.complete"));
     }
 }

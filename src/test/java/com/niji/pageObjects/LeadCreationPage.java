@@ -67,8 +67,12 @@ public class LeadCreationPage {
         return DriverManager.getDriver().driver.findElement(NewBy.jhitranslate("no"));
     }
 
-    public static WebElement getSearchClientInputField(){
+    public static WebElement getSearchSIRENClientInputField(){
         return DriverManager.getDriver().driver.findElement(By.id("thirdParty_registrationNumber"));
+    }
+
+    public static WebElement getSearchEmailClientInputField(){
+        return DriverManager.getDriver().driver.findElement(By.id("thirdParty_contactEmail"));
     }
 
     public static WebElement getSearchClientButton(){

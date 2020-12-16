@@ -43,8 +43,11 @@ public class DataClass {
     public String company_name = "";
     public String client_informations = "";
     public String client_email = "";
+
+    public String lead_type = "";
     // Project / Project deadline / Funding mode / Fleet size / Vehicle Model / Contract Duration / Trigger Event / Annual mileage / Details
     public ArrayList<String> leadInformations = new ArrayList<>();
+    // Marque & modèle / Version / Prix / Duration & mileage
     public ArrayList<String> existingOffer = new ArrayList<>();
 
     public void initialize() {

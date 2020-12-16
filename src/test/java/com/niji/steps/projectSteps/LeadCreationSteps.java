@@ -6,15 +6,12 @@ import com.niji.pageObjects.Alert;
 import com.niji.pageObjects.DatePicker;
 import com.niji.pageObjects.LeadCreationPage;
 import com.niji.pageObjects.MenuLinks;
-import com.niji.steps.globalSteps.BrowserSteps;
 import com.niji.steps.globalSteps.ElementSteps;
 import com.niji.steps.globalSteps.GenericSteps;
 import com.niji.utils.DateUtils;
 import com.niji.utils.NewBy;
-import cucumber.api.java.bs.A;
 import cucumber.api.java.en.When;
 import io.cucumber.datatable.DataTable;
-import org.apache.tools.ant.taskdefs.Echo;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -22,7 +19,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import javax.xml.crypto.Data;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,10 +44,15 @@ public class LeadCreationSteps {
         LeadCreationPage.getSearchAgentButton().click();
     }
 
-    @When("I select a personnal offer for the lead for a professionnal client")
-    public void choosePersonnalOffer() throws Exception{
-        ElementSteps.makeVisible(LeadCreationPage.getProfessionalRadioButton(), true);
-        LeadCreationPage.getProfessionalRadioButton().click();
+    @When("I select a personnal offer for the lead for a (.+) client")
+    public void choosePersonnalOffer(String type) throws Exception{
+        DataManager.getData().lead_type = type;
+        WebElement radioButton;
+        if(type.equals("professionnal")){
+            radioButton = LeadCreationPage.getProfessionalRadioButton();
+        } else radioButton = LeadCreationPage.getParticularRadioButton();
+        ElementSteps.makeVisible(radioButton, true);
+        radioButton.click();
         Thread.sleep(2000);
         WebElement offerBlock = null;
         try {
@@ -65,10 +66,15 @@ public class LeadCreationSteps {
         }
     }
 
-    @When("I select an existing offer for the lead for a professionnal client")
-    public void selectExistingOffer() throws Exception{
-        ElementSteps.makeVisible(LeadCreationPage.getProfessionalRadioButton(), true);
-        LeadCreationPage.getProfessionalRadioButton().click();
+    @When("I select an existing offer for the lead for a (.+) client")
+    public void selectExistingOffer(String type) throws Exception{
+        DataManager.getData().lead_type = type;
+        WebElement radioButton;
+        if(type.equals("professionnal")){
+            radioButton = LeadCreationPage.getProfessionalRadioButton();
+        } else radioButton = LeadCreationPage.getParticularRadioButton();
+        ElementSteps.makeVisible(radioButton, true);
+        radioButton.click();
         Thread.sleep(2000);
         WebElement offerBlock = null;
         try {
@@ -91,39 +97,51 @@ public class LeadCreationSteps {
         }
     }
 
-    @When("I search for the existing client \"(.+)\"")
-    public void searchClient(String client){
-        ElementSteps.makeVisible(LeadCreationPage.getSearchClientInputField(), true);
-        WebElement sirenYes = null;
-        try {
-            sirenYes = LeadCreationPage.getSIRENYesRadioButton();
-        } catch (Exception e){
+    @When("I search for the existing (.+) client \"(.+)\"")
+    public void searchClient(String type, String client){
+        WebElement searchField;
+        if (type.equals("professionnal")){
+            searchField = LeadCreationPage.getSearchSIRENClientInputField();
+        } else searchField = LeadCreationPage.getSearchEmailClientInputField();
+        ElementSteps.makeVisible(searchField, true);
+        if (type.equals("professionnal")){
+            WebElement sirenYes = null;
+            try {
+                sirenYes = LeadCreationPage.getSIRENYesRadioButton();
+            } catch (Exception e){
 
+            }
+            if (sirenYes != null) sirenYes.click();
         }
-        if (sirenYes != null) sirenYes.click();
-        (new Actions(DriverManager.getDriver().driver)).sendKeys(LeadCreationPage.getSearchClientInputField(), client).build().perform();
+        (new Actions(DriverManager.getDriver().driver)).sendKeys(searchField, client).build().perform();
         ElementSteps.waitForVisibilityOfElement(NewBy.jhitranslate("lead.alreadyExisting"),5);
         LeadCreationPage.getSearchClientButton().click();
         DataManager.getData().company_number = client;
     }
 
-    @When("I search for an existing client")
-    public void searchClient(){
-        ElementSteps.makeVisible(LeadCreationPage.getSearchClientInputField(), true);
-        WebElement sirenYes = null;
-        try {
-            sirenYes = LeadCreationPage.getSIRENYesRadioButton();
-        } catch (Exception e){
+    @When("I search for an existing (.+) client")
+    public void searchClient(String type){
+        WebElement searchField;
+        if (type.equals("professionnal")){
+            searchField = LeadCreationPage.getSearchSIRENClientInputField();
+        } else searchField = LeadCreationPage.getSearchEmailClientInputField();
+        ElementSteps.makeVisible(searchField, true);
+        if (type.equals("professionnal")){
+            WebElement sirenYes = null;
+            try {
+                sirenYes = LeadCreationPage.getSIRENYesRadioButton();
+            } catch (Exception e){
 
+            }
+            if (sirenYes != null) sirenYes.click();
         }
-        if (sirenYes != null) sirenYes.click();
-        (new Actions(DriverManager.getDriver().driver)).sendKeys(LeadCreationPage.getSearchClientInputField(), DataManager.getData().existing_client).build().perform();
+        (new Actions(DriverManager.getDriver().driver)).sendKeys(searchField, DataManager.getData().existing_client).build().perform();
         ElementSteps.waitForVisibilityOfElement(NewBy.jhitranslate("lead.alreadyExisting"),5);
         LeadCreationPage.getSearchClientButton().click();
         DataManager.getData().company_number = DataManager.getData().existing_client;
     }
 
-    @When("I check the client informations")
+    @When("I check the professionnal client informations")
     public void checkClientInformations(){
         ElementSteps.makeVisible(LeadCreationPage.getClientSocialNameField(), true);
         String name = LeadCreationPage.getClientSocialNameField().getAttribute("value");
@@ -132,10 +150,24 @@ public class LeadCreationSteps {
                 name, not(equalTo("")));
     }
 
+    @When("I check the particular client informations")
+    public void checkPartClientInformations(){
+        DataManager.getData().client_informations = "";
+        ElementSteps.makeVisible(LeadCreationPage.getClientFirstNameField(), true);
+        String info = LeadCreationPage.getClientFirstNameField().getAttribute("value");
+        DataManager.getData().client_informations = DataManager.getData().client_informations + info;
+        DataManager.getData().errorCollector.checkThat("Client first name is not the expected one",
+                info, not(equalTo("")));
+        info = LeadCreationPage.getClientLastNameField().getAttribute("value");
+        DataManager.getData().client_informations = DataManager.getData().client_informations + info;
+        DataManager.getData().errorCollector.checkThat("Client last name is not the expected one",
+                info, not(equalTo("")));
+    }
+
     @When("I check the contact informations")
     public void checkContactInformations(){
         try {
-            // TODO save client contact info
+            DataManager.getData().client_informations = "";
             ElementSteps.makeVisible(LeadCreationPage.getClientFirstNameField(), true);
             String info = LeadCreationPage.getClientFirstNameField().getAttribute("value");
             DataManager.getData().client_informations = DataManager.getData().client_informations + info;

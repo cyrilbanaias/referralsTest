@@ -1,6 +1,7 @@
 package com.niji.steps.globalSteps;
 
 import com.niji.factory.DriverManager;
+import com.niji.utils.NewBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -77,5 +78,9 @@ public class ClientCardPage {
 
     public static WebElement getBankAdviserEmailField(){
         return getOpenedLeadDetailsBlock().findElement(By.xpath(".//*[@jhitranslate=\"client-card.clientNeedsBlock.formulatedLead.bankAdvisor\"]/../span/span"));
+    }
+
+    public static WebElement getEditLeadLink(){
+        return getOpenedLeadDetailsBlock().findElement(NewBy.jhitranslate("client-card.clientNeedsBlock.formulatedLead.edit"));
     }
 }

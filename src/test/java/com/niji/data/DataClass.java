@@ -2,11 +2,8 @@ package com.niji.data;
 
 import com.niji.factory.CapabilitiesManager;
 import com.niji.utils.ErrorCollector;
-import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class DataClass {
 
@@ -19,7 +16,8 @@ public class DataClass {
 
     public String UAT = "https://my.uat.arval.com/";
 
-    public String REFERRALs = "https://referrals-uat.sta2.intra.corp/referrals/";
+    public String REFERRALS = "https://referrals-uat.sta2.intra.corp/referrals/";
+    public String ADMIN_TOOL = "https://referrals-uat-admin.sta2.intra.corp/";
 
     public String used_account = "";
     public String used_account_name = "";
@@ -64,7 +62,9 @@ public class DataClass {
                     return UAT;
                 }
             case "Referrals":
-                return REFERRALs;
+                return REFERRALS;
+            case "Admin Tool":
+                return ADMIN_TOOL;
         }
         return param;
     }

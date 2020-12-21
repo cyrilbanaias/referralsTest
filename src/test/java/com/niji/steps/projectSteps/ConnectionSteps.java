@@ -71,7 +71,9 @@ public class ConnectionSteps {
                 accounts.remove(account);
                 DriverManager.getDriver().scenario.write(account.get(2));
                 DataManager.getData().account_settings = account.get(1);
-                DataManager.getData().existing_client = account.get(4);
+                if (!DataManager.getData().account_type.equals("ADMIN")){
+                    DataManager.getData().existing_client = account.get(4);
+                }
                 login(account.get(2), account.get(3));
                 checkIfConnected();
                 connected = true;
@@ -147,10 +149,10 @@ public class ConnectionSteps {
     @When("I am on the homepage")
     public static void checkIfConnected() throws Exception{
         try {
-            new WebDriverWait(DriverManager.getDriver().driver, 60).until(ExpectedConditions.or(ExpectedConditions.urlContains("referrals/"), ExpectedConditions.urlContains("order-tracking")));
+            new WebDriverWait(DriverManager.getDriver().driver, 60).until(ExpectedConditions.or(ExpectedConditions.urlContains("referrals/"), ExpectedConditions.urlContains("admin")));
         } catch (Exception e){
             DriverManager.getDriver().scenario.write(DriverManager.getDriver().driver.getCurrentUrl());
-            throw new Exception("The actual page is not the expected one (" +DriverManager.getDriver().driver.getCurrentUrl()+ "). Expected homepage or order-tracking");
+            throw new Exception("The actual page is not the expected one (" +DriverManager.getDriver().driver.getCurrentUrl()+ "). Expected referrals HP or admin tool");
         }
         DriverManager.getDriver().scenario.write(DriverManager.getDriver().driver.getCurrentUrl());
         try{

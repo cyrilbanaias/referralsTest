@@ -272,7 +272,11 @@ public class LeadCreationPage {
         return DriverManager.getDriver().driver.findElement(NewBy.jhitranslate("lead.send.print"));
     }
 
+    public static WebElement getSaveButton(){
+        return DriverManager.getDriver().driver.findElement(By.xpath("//*[contains(@id,\"saveButton\")]"));
+    }
+
     public static WebElement getSendButton(){
-        return DriverManager.getDriver().driver.findElement(NewBy.jhitranslate("lead.send.complete"));
+        return DriverManager.getDriver().driver.findElement(By.id("completeButton"));
     }
 }

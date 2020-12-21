@@ -17,7 +17,7 @@ import static org.hamcrest.CoreMatchers.*;
 public class ClientCardSteps {
 
     @When("I can see the lead on the client page")
-    public void checkLeadOnClientPage() throws Exception{
+    public static void checkLeadOnClientPage() throws Exception{
         if (DataManager.getData().lead_type.equals("professionnal")){
             DataManager.getData().errorCollector.checkThat("Company name is not the expected one",
                     ClientCardPage.getCompanyNameArea().getAttribute("innerHTML"),
@@ -130,5 +130,22 @@ public class ClientCardSteps {
             } catch (Exception e){}
         }
         DriverManager.getDriver().driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+    @When("I can see the saved lead on the client page")
+    public static void checkSavedLeadOnClientPage() throws Exception{
+        ElementSteps.makeVisible(ClientCardPage.getOpenedLeadDetailsBlock(), true);
+        GenericSteps.screenShot();
+        DataManager.getData().errorCollector.checkThat("Edit link is not visible",
+                ClientCardPage.getEditLeadLink().isDisplayed(),
+                equalTo(true));
+        checkLeadOnClientPage();
+    }
+
+    @When("I modify the lead")
+    public void modifySavedLead() throws Exception{
+        ElementSteps.makeVisible(ClientCardPage.getEditLeadLink(), false);
+        ClientCardPage.getEditLeadLink().click();
+        Thread.sleep(5000);
     }
 }

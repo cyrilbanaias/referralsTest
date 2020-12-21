@@ -215,7 +215,9 @@ public class LeadCreationSteps {
                 ((JavascriptExecutor) DriverManager.getDriver().driver).executeScript("arguments[0].click()", DatePicker.getOpenCalendarButton());
                 DateUtils.datePickerSelection(newDate);
                 ElementSteps.makeVisible(DatePicker.getHourField(), true);
+                DatePicker.getHourField().clear();
                 action.sendKeys(DatePicker.getHourField(), list.get(1).split(":")[0]).build().perform();
+                DatePicker.getMinutesField().clear();
                 action.sendKeys(DatePicker.getMinutesField(), list.get(1).split(":")[1]).build().perform();
             }
         } catch (Exception e){}
@@ -237,6 +239,7 @@ public class LeadCreationSteps {
         }
 
         try {
+            LeadCreationPage.getFleetSizeInputField().clear();
             action.sendKeys(LeadCreationPage.getFleetSizeInputField(), list.get(2)).build().perform();
             DataManager.getData().leadInformations.add(list.get(2));
         } catch (Exception e){
@@ -246,6 +249,7 @@ public class LeadCreationSteps {
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
             String comment = formatter.format(new Date());
+            LeadCreationPage.getVehicleModelInputField().clear();
             action.sendKeys(LeadCreationPage.getVehicleModelInputField(), comment).build().perform();
             DataManager.getData().leadInformations.add(comment);
         } catch (Exception e){
@@ -269,6 +273,7 @@ public class LeadCreationSteps {
         }
 
         try {
+            LeadCreationPage.getAnnualMileageInputField().clear();
             action.sendKeys(LeadCreationPage.getAnnualMileageInputField(), list.get(3)).build().perform();
             DataManager.getData().leadInformations.add(list.get(3));
         } catch (Exception e){
@@ -283,6 +288,7 @@ public class LeadCreationSteps {
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
             String comment = formatter.format(new Date());
+            LeadCreationPage.getMoreDetailsField().clear();
             action.sendKeys(LeadCreationPage.getMoreDetailsField(), comment).build().perform();
             DataManager.getData().leadInformations.add(comment);
         } catch (Exception e){
@@ -301,7 +307,7 @@ public class LeadCreationSteps {
     @When("I send the lead by email")
     public void sendLeadByEmail(){
         ElementSteps.makeVisible(LeadCreationPage.getGDPRCheckBox(), true);
-        LeadCreationPage.getGDPRCheckBox().click();
+        ((JavascriptExecutor) DriverManager.getDriver().driver).executeScript("arguments[0].click()", LeadCreationPage.getGDPRCheckBox());
         ElementSteps.makeVisible(LeadCreationPage.getSendLinkButton(), true);
         LeadCreationPage.getSendLinkButton().click();
         ElementSteps.waitForVisibilityOfElement(Alert.getSuccessAlert(), 5);
@@ -316,11 +322,21 @@ public class LeadCreationSteps {
         }
     }
 
+    @When("I save the lead")
+    public void saveLead() throws Exception{
+        ElementSteps.makeVisible(LeadCreationPage.getSaveButton(), true);
+        LeadCreationPage.getSaveButton().click();
+        Thread.sleep(5000);
+        DataManager.getData().errorCollector.checkThat("URL is not the expected one",
+                DriverManager.getDriver().driver.getCurrentUrl(),
+                containsString("referrals/lead-view"));
+    }
+
     @When("I send the lead to salesforce")
     public void sendToSalesforce() throws Exception{
         ElementSteps.makeVisible(LeadCreationPage.getSendButton(), true);
         LeadCreationPage.getSendButton().click();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         DataManager.getData().errorCollector.checkThat("URL is not the expected one",
                 DriverManager.getDriver().driver.getCurrentUrl(),
                 containsString("referrals/lead-view"));

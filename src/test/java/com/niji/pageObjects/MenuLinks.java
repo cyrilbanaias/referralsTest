@@ -1,0 +1,18 @@
+package com.niji.pageObjects;
+
+import com.niji.factory.DriverManager;
+import com.niji.steps.globalSteps.ElementSteps;
+import com.niji.utils.NewBy;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+public class MenuLinks {
+    public static WebElement getLeadCreationMenuDropdown(){
+        return DriverManager.getDriver().driver.findElement(By.id("dropdownReferralsLead"));
+    }
+
+    public static WebElement getLeadCreationMenuLink(){
+        ElementSteps.waitForVisibilityOfElement(NewBy.jhitranslate("lead.title"), 5);
+        return DriverManager.getDriver().driver.findElement(NewBy.jhitranslate("lead.title"));
+    }
+}

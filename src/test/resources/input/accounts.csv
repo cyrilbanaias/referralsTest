@@ -1,3 +1,8 @@
-Type;Settings;Email;Password
-BNPP;create_lead;gilbert.trips@bnpparibas.com;100%Arval
-FORTIS;create_lead;sophie.buysse@bnpparibasfortis.com;100%Arval
+Type;Settings;Email;Password:Existing_client
+FORTIS;create_lead_as_agent - edit_lead;referrals_auto_fortis@getnada.com;100%Arval;19640721
+BDDF;create_lead;referrals_auto_bddf@getnada.com;100%Arval;
+BGZ;create_lead_as_agent;referrals_auto_bgz@getnada.com;100%Arval;19640721
+GENERALI;create_lead_as_agent;referrals_auto_generali@getnada.com;100%Arval;824132799
+BGL;create_lead_as_agent;referrals_auto_bgl@getnada.com;100%Arval;19640721
+BNPP;create_lead_as_agent;referrals_auto_bnpp@getnada.com;100%Arval;19640721
+ADMIN;admin;gaetan.rageul@niji.fr;Arval2020!;

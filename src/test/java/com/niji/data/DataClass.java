@@ -2,11 +2,8 @@ package com.niji.data;
 
 import com.niji.factory.CapabilitiesManager;
 import com.niji.utils.ErrorCollector;
-import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class DataClass {
 
@@ -19,7 +16,8 @@ public class DataClass {
 
     public String UAT = "https://my.uat.arval.com/";
 
-    public String REFERRALs = "https://referrals-uat.sta2.intra.corp/referrals/";
+    public String REFERRALS = "https://referrals-uat.sta2.intra.corp/referrals/";
+    public String ADMIN_TOOL = "https://referrals-uat-admin.sta2.intra.corp/";
 
     public String used_account = "";
     public String used_account_name = "";
@@ -37,6 +35,20 @@ public class DataClass {
     public String language = "";
     public String account_type = "";
     public String account_settings = "";
+    public String existing_client = "";
+
+    public String company_number = "";
+    public String company_name = "";
+    public String client_informations = "";
+    public String client_email = "";
+
+    public String lead_type = "";
+    // Project / Project deadline / Funding mode / Fleet size / Vehicle Model / Contract Duration / Trigger Event / Annual mileage / Details
+    public ArrayList<String> leadInformations = new ArrayList<>();
+    // Marque & modèle / Version / Prix / Duration & mileage
+    public ArrayList<String> existingOffer = new ArrayList<>();
+
+    public String newProfile = "";
 
     public void initialize() {
     }
@@ -52,7 +64,9 @@ public class DataClass {
                     return UAT;
                 }
             case "Referrals":
-                return REFERRALs;
+                return REFERRALS;
+            case "Admin Tool":
+                return ADMIN_TOOL;
         }
         return param;
     }

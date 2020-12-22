@@ -48,6 +48,8 @@ public class DataClass {
     // Marque & modèle / Version / Prix / Duration & mileage
     public ArrayList<String> existingOffer = new ArrayList<>();
 
+    public String newProfile = "";
+
     public void initialize() {
     }
 

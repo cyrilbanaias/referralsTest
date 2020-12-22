@@ -32,15 +32,17 @@ public class ProfilePage {
     }
 
     public static WebElement getCreateProfileButton(){
+        ElementSteps.waitForVisibilityOfElement(By.xpath("//*[@jhitranslate=\"frontendadminApp.profiles.createButton\"]/.."), 5);
         return DriverManager.getDriver().driver.findElement(By.xpath("//*[@jhitranslate=\"frontendadminApp.profiles.createButton\"]/.."));
     }
 
     public static WebElement getNewProfileCodeField(){
-        return DriverManager.getDriver().driver.findElement(By.id("field_code"));
+        ElementSteps.waitForPresenceOfElement(By.xpath("//*[@name=\"profileDetailsForm\"]//*[@id=\"field_code\"]"), 5);
+        return DriverManager.getDriver().driver.findElement(By.xpath("//*[@name=\"profileDetailsForm\"]//*[@id=\"field_code\"]"));
     }
 
     public static WebElement getNewProfilTitleField(){
-        return DriverManager.getDriver().driver.findElement(By.id("field_name"));
+        return DriverManager.getDriver().driver.findElement(By.xpath("//*[@name=\"profileDetailsForm\"]//*[@id=\"field_name\"]"));
     }
 
     public static List<WebElement> getAccessSwitchButtons(){
@@ -48,6 +50,6 @@ public class ProfilePage {
     }
 
     public static WebElement getSaveButton(){
-        return DriverManager.getDriver().driver.findElement(By.id("save-entity"));
+        return DriverManager.getDriver().driver.findElement(By.xpath("//*[@name=\"profileDetailsForm\"]//*[@id=\"save-entity\"]"));
     }
 }

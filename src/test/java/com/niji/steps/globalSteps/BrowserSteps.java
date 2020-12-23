@@ -38,8 +38,12 @@ public class BrowserSteps {
         }
         if (CapabilitiesManager.getCapabilities().capabilities.getCapability("platformName").toString().equals("chrome")
                 || CapabilitiesManager.getCapabilities().capabilities.getCapability("platformName").toString().equals("new_edge")){
-            DriverManager.getDriver().driver.findElement(By.id("details-button")).click();
-            DriverManager.getDriver().driver.findElement(By.id("proceed-link")).click();
+            try {
+                DriverManager.getDriver().driver.findElement(By.id("details-button")).click();
+                DriverManager.getDriver().driver.findElement(By.id("proceed-link")).click();
+            } catch (Exception e){
+                
+            }
         }
         Thread.sleep(5000);
     }

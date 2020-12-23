@@ -1,13 +1,10 @@
 package com.niji.steps.projectSteps.adminTool;
 
-import com.niji.factory.DriverManager;
 import com.niji.pageObjects.adminTools.MenuLinks;
 import com.niji.pageObjects.adminTools.PartnersPage;
 import com.niji.steps.globalSteps.ElementSteps;
 import cucumber.api.java.en.When;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import sun.plugin2.message.JavaScriptBaseMessage;
 
 public class AdminToolSteps {
 

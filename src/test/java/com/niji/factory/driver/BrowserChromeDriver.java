@@ -60,7 +60,7 @@ public class BrowserChromeDriver {
             preferences.put("profile.default_content_settings.popups", 0);
             preferences.put("download.default_directory", downloadFilepath);
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("--headless");
+            //options.addArguments("--headless");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
             if (DataManager.getData().os.equals("linux")) {

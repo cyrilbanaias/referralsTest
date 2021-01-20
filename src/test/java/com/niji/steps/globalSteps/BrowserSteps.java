@@ -85,9 +85,24 @@ public class BrowserSteps {
 
     @When("I open a new tab")
     public static void openNewTab(){
+        DataManager.getData().activeTab = 0;
         ((JavascriptExecutor) DriverManager.getDriver().driver).executeScript("window.open()");
         ArrayList<String> tabs2 = new ArrayList<String> (DriverManager.getDriver().driver.getWindowHandles());
         DriverManager.getDriver().driver.switchTo().window(tabs2.get(1));
+        DataManager.getData().activeTab = 1;
+    }
+
+    @When("I switch active tab on the browser")
+    public static void switchTab(){
+        ArrayList<String> tabs2 = new ArrayList<String> (DriverManager.getDriver().driver.getWindowHandles());
+        if (DataManager.getData().activeTab == 1){
+            DriverManager.getDriver().driver.switchTo().window(tabs2.get(0));
+            DataManager.getData().activeTab = 0;
+        }
+        else if (DataManager.getData().activeTab == 0){
+            DriverManager.getDriver().driver.switchTo().window(tabs2.get(1));
+            DataManager.getData().activeTab = 1;
+        }
     }
 
     @Then("a new tab is opened")

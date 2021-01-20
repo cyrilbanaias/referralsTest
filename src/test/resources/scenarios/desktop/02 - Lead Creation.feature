@@ -82,3 +82,4 @@ Feature: Lead Creation
     And I am on "Salesforce"
     And I login on Salesforce
     Then I open the lead queue "BEL - SME - Bank Leads Queue"
+    And I switch active tab on the browser

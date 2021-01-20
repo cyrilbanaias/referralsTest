@@ -14,6 +14,7 @@ public class DataClass {
     public String environnement = "UAT";
     public String initialURL = "";
     public boolean closePopup = true;
+    public int activeTab = 0;
 
     public String UAT = "https://my.uat.arval.com/";
 

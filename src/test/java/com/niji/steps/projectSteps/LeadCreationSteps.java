@@ -2,16 +2,14 @@ package com.niji.steps.projectSteps;
 
 import com.niji.data.DataManager;
 import com.niji.factory.DriverManager;
-import com.niji.pageObjects.Alert;
-import com.niji.pageObjects.DatePicker;
-import com.niji.pageObjects.LeadCreationPage;
-import com.niji.pageObjects.MenuLinks;
+import com.niji.pageObjects.*;
 import com.niji.steps.globalSteps.ElementSteps;
 import com.niji.steps.globalSteps.GenericSteps;
 import com.niji.utils.DateUtils;
 import com.niji.utils.NewBy;
 import cucumber.api.java.en.When;
 import io.cucumber.datatable.DataTable;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -35,6 +33,44 @@ public class LeadCreationSteps {
         MenuLinks.getLeadCreationMenuDropdown().click();
         MenuLinks.getLeadCreationMenuLink().click();
         new WebDriverWait(DriverManager.getDriver().driver, 10).until(ExpectedConditions.urlContains("leadForm"));
+    }
+
+    @When("the insert is displayed on the lead creation page")
+    public void checkInsertOnLeadCreationPage() throws Exception{
+        // Check title, subtitle, description, link text and link href
+        try {
+            WebElement block = InsertsElements.getColumnInsertBlock();
+            InsertsElements.getInsertTitle(block, DataManager.getData().insertionName);
+            InsertsElements.getInsertSubtitle(block, DataManager.getData().insertionName);
+            InsertsElements.getInsertDescription(block, DataManager.getData().insertionName);
+            InsertsElements.getInsertImage(block, DataManager.getData().insertionName);
+            InsertsElements.getInsertAction(block, DataManager.getData().insertionName);
+            InsertsElements.getInsertActionURL(block, DataManager.getData().insertionName);
+        } catch (Exception e){
+            GenericSteps.screenShot();
+            throw new Exception("One or more elements of the insert is not displayed/present");
+        }
+    }
+
+    @When("the insert is not displayed anymore on the lead creation page")
+    public void checkInsertDeletedOnLeadCreationPage() throws Exception{
+        // Check title, subtitle, description, link text and link href
+        WebElement insertion = null;
+        try {
+            WebElement block = InsertsElements.getColumnInsertBlock();
+            insertion = InsertsElements.getInsertTitle(block, DataManager.getData().insertionName);
+            insertion = InsertsElements.getInsertSubtitle(block, DataManager.getData().insertionName);
+            insertion = InsertsElements.getInsertDescription(block, DataManager.getData().insertionName);
+            insertion = InsertsElements.getInsertImage(block, DataManager.getData().insertionName);
+            insertion = InsertsElements.getInsertAction(block, DataManager.getData().insertionName);
+            insertion = InsertsElements.getInsertActionURL(block, DataManager.getData().insertionName);
+        } catch (Exception e){
+
+        }
+        if (insertion != null){
+            GenericSteps.screenShot();
+            throw new Exception("Freshly created insertion is still present in the list");
+        }
     }
 
     @When("I choose to create the lead as myself")
@@ -148,6 +184,9 @@ public class LeadCreationSteps {
         DataManager.getData().company_name = name;
         DataManager.getData().errorCollector.checkThat("Comapny name is not the expected one",
                 name, not(equalTo("")));
+        String newDate = DateUtils.getNewStringDate(10, "yyyy/MM/dd");
+        ((JavascriptExecutor) DriverManager.getDriver().driver).executeScript("arguments[0].click()", DatePicker.getOpenCalendarButton());
+        DateUtils.datePickerSelection(newDate);
     }
 
     @When("I check the particular client informations")
@@ -162,6 +201,9 @@ public class LeadCreationSteps {
         DataManager.getData().client_informations = DataManager.getData().client_informations + info;
         DataManager.getData().errorCollector.checkThat("Client last name is not the expected one",
                 info, not(equalTo("")));
+        String newDate = DateUtils.getNewStringDate(10, "yyyy/MM/dd");
+        ((JavascriptExecutor) DriverManager.getDriver().driver).executeScript("arguments[0].click()", DatePicker.getOpenCalendarButton());
+        DateUtils.datePickerSelection(newDate);
     }
 
     @When("I check the contact informations")

@@ -6,6 +6,7 @@ import com.niji.factory.DriverClass;
 import com.niji.factory.DriverFactory;
 import com.niji.factory.DriverManager;
 import com.niji.pageObjects.LoginPage;
+import com.niji.pageObjects.MenuLinks;
 import com.niji.steps.globalSteps.BrowserSteps;
 import com.niji.steps.globalSteps.ElementSteps;
 import com.niji.steps.globalSteps.GenericSteps;
@@ -17,6 +18,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -156,14 +158,19 @@ public class ConnectionSteps {
         }
         DriverManager.getDriver().scenario.write(DriverManager.getDriver().driver.getCurrentUrl());
         try{
-            PopUpSteps.closePoUp();
+            if (DataManager.getData().closePopup) PopUpSteps.closePoUp();
         } catch (Exception e){
             // Do Nothing if no popup
         }
     }
 
-    @When("I log out from my account")
-    public void logout(){
+    @When("I disconnect from Referrals")
+    public void disconnect(){
+        ElementSteps.makeVisible(MenuLinks.getAccountMenuLink(), true);
+        MenuLinks.getAccountMenuLink().click();
+        ElementSteps.waitForVisibilityOfElement(MenuLinks.getLogoutMenuLink(), 5);
+        MenuLinks.getLogoutMenuLink().click();
+        ElementSteps.waitForVisibilityOfElement(LoginPage.getUserEmailField(), 20);
     }
 
     @Then("I am back on login page")

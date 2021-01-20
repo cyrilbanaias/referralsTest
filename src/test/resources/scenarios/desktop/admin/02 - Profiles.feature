@@ -1,8 +1,8 @@
 # @author : Gaëtan RAGEUL
-@admin
-Feature: Admin tool
+@admin @profile
+Feature: 02 - Profiles
 
-  Scenario: 02 - Create and delete a profil
+  Scenario: 01 - Create and delete a profil
     Given I am on "Admin Tool"
     When I login with an account:
       | ADMIN | admin |

@@ -83,6 +83,13 @@ public class BrowserSteps {
                 ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
     }
 
+    @When("I open a new tab")
+    public static void openNewTab(){
+        ((JavascriptExecutor) DriverManager.getDriver().driver).executeScript("window.open()");
+        ArrayList<String> tabs2 = new ArrayList<String> (DriverManager.getDriver().driver.getWindowHandles());
+        DriverManager.getDriver().driver.switchTo().window(tabs2.get(1));
+    }
+
     @Then("a new tab is opened")
     public static void checkNewTab() throws Exception {
         Thread.sleep(2000);

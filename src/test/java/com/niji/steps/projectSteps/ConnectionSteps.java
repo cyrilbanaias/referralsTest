@@ -151,7 +151,9 @@ public class ConnectionSteps {
     @When("I am on the homepage")
     public static void checkIfConnected() throws Exception{
         try {
-            new WebDriverWait(DriverManager.getDriver().driver, 60).until(ExpectedConditions.or(ExpectedConditions.urlContains("referrals/"), ExpectedConditions.urlContains("admin")));
+            new WebDriverWait(DriverManager.getDriver().driver, 60).until(ExpectedConditions.or(ExpectedConditions.urlContains("referrals/"),
+                    ExpectedConditions.urlContains("admin"),
+                    ExpectedConditions.urlContains("lightning/page/home")));
         } catch (Exception e){
             DriverManager.getDriver().scenario.write(DriverManager.getDriver().driver.getCurrentUrl());
             throw new Exception("The actual page is not the expected one (" +DriverManager.getDriver().driver.getCurrentUrl()+ "). Expected referrals HP or admin tool");
@@ -180,5 +182,13 @@ public class ConnectionSteps {
         } catch (Exception e){
             throw new Exception("Unexpected behaviour after log out.");
         }
+    }
+
+    @When("I login on Salesforce")
+    public void loginOnSalesforce() throws Exception{
+        com.niji.pageObjects.salesforce.LoginPage.getUSernameField().sendKeys(DataManager.getData().salesforce_account);
+        com.niji.pageObjects.salesforce.LoginPage.getPasswordField().sendKeys(DataManager.getData().salesforce_password);
+        com.niji.pageObjects.salesforce.LoginPage.getConnectionButton().click();
+        checkIfConnected();
     }
 }

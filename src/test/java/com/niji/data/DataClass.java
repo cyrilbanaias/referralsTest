@@ -19,10 +19,14 @@ public class DataClass {
 
     public String REFERRALS = "https://referrals-uat.sta2.intra.corp/referrals/";
     public String ADMIN_TOOL = "https://referrals-uat-admin.sta2.intra.corp/";
+    public String SALESFORCE = "https://arval--testing.lightning.force.com";
 
     public String used_account = "";
     public String used_account_name = "";
     public String account_profile = "";
+
+    public String salesforce_account = "audrey.lavidalle@arval.com.testing";
+    public String salesforce_password = "200%Arval";
 
     public String account_random = "";
     public String account_empty_chrome = "test@yopmail.com";
@@ -70,6 +74,8 @@ public class DataClass {
                 return REFERRALS;
             case "Admin Tool":
                 return ADMIN_TOOL;
+            case "Salesforce":
+                return SALESFORCE;
         }
         return param;
     }

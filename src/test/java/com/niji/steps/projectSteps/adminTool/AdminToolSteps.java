@@ -1,5 +1,6 @@
 package com.niji.steps.projectSteps.adminTool;
 
+import com.niji.pageObjects.LoginPage;
 import com.niji.pageObjects.adminTools.MenuLinks;
 import com.niji.pageObjects.adminTools.PartnersPage;
 import com.niji.steps.globalSteps.ElementSteps;
@@ -19,5 +20,14 @@ public class AdminToolSteps {
         WebElement editButton = PartnersPage.getPartnerEditButton(partnerLine);
         ElementSteps.makeVisible(editButton, true);
         editButton.click();
+    }
+
+    @When("I disconnect from admin tool")
+    public void disconnect(){
+        ElementSteps.makeVisible(MenuLinks.getAccountMenuLink(), true);
+        MenuLinks.getAccountMenuLink().click();
+        ElementSteps.waitForVisibilityOfElement(MenuLinks.getLogoutLink(), 5);
+        MenuLinks.getLogoutLink().click();
+        ElementSteps.waitForVisibilityOfElement(LoginPage.getUserEmailField(), 20);
     }
 }

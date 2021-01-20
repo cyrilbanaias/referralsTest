@@ -45,7 +45,7 @@ public class LeadCreationPage {
     }
 
     public static WebElement getPersonnalOfferLink(){
-        return getOfferBlockELement().findElement(By.xpath(".//a[not(@name=\"octopusOffer\")]"));
+        return getOfferBlockELement().findElement(By.xpath(".//a[not(@name=\"octopusOffer\") and contains(@class,\"card-link\")]"));
     }
 
     // Search Client Block
@@ -118,11 +118,11 @@ public class LeadCreationPage {
     }
 
     public static WebElement getNextCertificationButton(){
-        return DriverManager.getDriver().driver.findElement(By.xpath("//*[@id=\"thirdParty_rsfCotationLastReviewDate\"]/..//*[@data-icon=\"calendar-alt\"]/../.."));
+        return DriverManager.getDriver().driver.findElement(By.xpath("//*[@id=\"thirdParty_rsfCotationNextReviewDate\"]/..//*[@data-icon=\"calendar-alt\"]/../.."));
     }
 
     public static WebElement getNextCertificationField(){
-        return DriverManager.getDriver().driver.findElement(By.xpath("//*[@id=\"thirdParty_rsfCotationLastReviewDate\"]"));
+        return DriverManager.getDriver().driver.findElement(By.xpath("//*[@id=\"thirdParty_rsfCotationNextReviewDate\"]"));
     }
 
     public static WebElement getCotationsReasonField(){

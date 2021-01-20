@@ -15,4 +15,16 @@ public class MenuLinks {
         ElementSteps.waitForVisibilityOfElement(NewBy.jhitranslate("lead.title"), 5);
         return DriverManager.getDriver().driver.findElement(NewBy.jhitranslate("lead.title"));
     }
+
+    public static WebElement getAccountMenuLink(){
+        return DriverManager.getDriver().driver.findElement(By.id("dropdownUserSelfcare"));
+    }
+
+    public static WebElement getLogoutMenuLink(){
+        return DriverManager.getDriver().driver.findElement(By.id("logout"));
+    }
+
+    public static WebElement getNewsAndInfosMenuLink(){
+        return DriverManager.getDriver().driver.findElement(NewBy.jhitranslate("global.menu.news"));
+    }
 }

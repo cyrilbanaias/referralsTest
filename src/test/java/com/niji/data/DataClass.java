@@ -13,6 +13,7 @@ public class DataClass {
     public String os = "win";
     public String environnement = "UAT";
     public String initialURL = "";
+    public boolean closePopup = true;
 
     public String UAT = "https://my.uat.arval.com/";
 
@@ -49,6 +50,8 @@ public class DataClass {
     public ArrayList<String> existingOffer = new ArrayList<>();
 
     public String newProfile = "";
+    public String insertionName = "";
+    public ArrayList<String> insertionsOrder = new ArrayList<>();
 
     public void initialize() {
     }

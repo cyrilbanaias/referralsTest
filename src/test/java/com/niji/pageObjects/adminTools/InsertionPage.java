@@ -96,7 +96,7 @@ public class InsertionPage {
     }
 
     public static List<WebElement> getInsertionTableTitles(){
-        return DriverManager.getDriver().driver.findElements(By.xpath("//*[contains(@class,\"ui-orderlist-item\")]/div/div[3]"));
+        return DriverManager.getDriver().driver.findElements(By.xpath("//p-orderlist[not(@header=\"Arval Contacts\")]//*[contains(@class,\"ui-orderlist-item\")]/div/div[3]"));
     }
 
     public static List<WebElement> getModifyButtons(){

@@ -16,6 +16,11 @@ public class MenuLinks {
         return DriverManager.getDriver().driver.findElement(NewBy.jhitranslate("lead.title"));
     }
 
+    public static WebElement getSearchLeadMenuLink(){
+        ElementSteps.waitForVisibilityOfElement(NewBy.jhitranslate("follow.title"), 5);
+        return DriverManager.getDriver().driver.findElement(NewBy.jhitranslate("follow.title"));
+    }
+
     public static WebElement getAccountMenuLink(){
         return DriverManager.getDriver().driver.findElement(By.id("dropdownUserSelfcare"));
     }

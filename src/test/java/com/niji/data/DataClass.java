@@ -53,6 +53,8 @@ public class DataClass {
     public String insertionName = "";
     public ArrayList<String> insertionsOrder = new ArrayList<>();
 
+    public String searchStatus = "";
+
     public void initialize() {
     }
 

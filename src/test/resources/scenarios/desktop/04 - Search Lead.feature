@@ -9,7 +9,7 @@ Feature: Search lead
     And I open the search lead page
     And I search for an existing company number
     Then all the results are from this company
-
+@test
   Scenario Outline: 06 - Research a lead by multi criteria - Status
     Given I am on "Referrals"
     When I login with an account:
@@ -20,5 +20,5 @@ Feature: Search lead
 
     Examples:
     | status |
-    | Demande créée |
-    | Contrat en attente signature client |
+    | Need created |
+    | Closing The deal |

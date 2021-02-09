@@ -162,6 +162,8 @@ public class ConnectionSteps {
         } catch (Exception e){
             // Do Nothing if no popup
         }
+        // Save the language
+        DataManager.getData().language = MenuLinks.getLanguageMenuLink().getText();
     }
 
     @When("I disconnect from Referrals")

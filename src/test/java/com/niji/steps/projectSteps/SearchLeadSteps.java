@@ -6,6 +6,7 @@ import com.niji.pageObjects.MenuLinks;
 import com.niji.pageObjects.SearchLeadPage;
 import com.niji.steps.globalSteps.ElementSteps;
 import com.niji.steps.globalSteps.GenericSteps;
+import com.niji.utils.Traduction;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -38,7 +39,7 @@ public class SearchLeadSteps {
     public void searchForStatus(String status) throws Exception{
         DataManager.getData().searchStatus = status;
         SearchLeadPage.getMoreCriteriaLink().click();
-        SearchLeadPage.getStatusButton(status).click();
+        SearchLeadPage.getStatusButton(Traduction.getLeadStatusTraduction(status)).click();
         SearchLeadPage.getSearchBurron().click();
         Thread.sleep(5000);
     }
@@ -71,7 +72,7 @@ public class SearchLeadSteps {
                 lineValues = lineValues + "|" + td.getText();
             }
             DataManager.getData().errorCollector.checkThat("One line does not contains the searched status.",
-                    lineValues, containsString(DataManager.getData().searchStatus.toUpperCase()));
+                    lineValues, containsString(Traduction.getLeadStatusTraduction(DataManager.getData().searchStatus).toUpperCase()));
         }
     }
 }

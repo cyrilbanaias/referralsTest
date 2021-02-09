@@ -32,4 +32,8 @@ public class MenuLinks {
     public static WebElement getNewsAndInfosMenuLink(){
         return DriverManager.getDriver().driver.findElement(NewBy.jhitranslate("global.menu.news"));
     }
+
+    public static WebElement getLanguageMenuLink(){
+        return DriverManager.getDriver().driver.findElement(By.id("dropdownLanguage"));
+    }
 }

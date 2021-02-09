@@ -8,4 +8,7 @@ import java.util.*;
 
 public class Traduction {
 
+    public static String getLeadStatusTraduction(String type){
+        return TraductionManager.getTraduction().leadStatus.get(type).get(DataManager.getData().language);
+    }
 }

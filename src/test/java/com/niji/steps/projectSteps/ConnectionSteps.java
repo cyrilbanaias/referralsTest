@@ -14,6 +14,7 @@ import cucumber.api.java.en.Then;
 import com.niji.utils.ReadCSVFile;
 import cucumber.api.java.en.When;
 import io.cucumber.datatable.DataTable;
+import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -130,6 +131,13 @@ public class ConnectionSteps {
     @When("^I log in with \"(.+)\" / \"(.+)\"$")
     public void login(String email, String password){
         Actions action = new Actions(DriverManager.getDriver().driver);
+        // Cookies
+        try {
+            ElementSteps.waitForVisibilityOfElement(By.id("onetrust-accept-btn-handler"), 5);
+            DriverManager.getDriver().driver.findElement(By.id("onetrust-accept-btn-handler")).click();
+        } catch (Exception e){
+            DriverManager.getDriver().scenario.write(e.getMessage());
+        }
         DataManager.getData().used_account = email;
         ElementSteps.waitForVisibilityOfElement(LoginPage.getUserEmailField(), 30);
         LoginPage.getUserEmailField().clear();

@@ -1,5 +1,0 @@
-selenium : 3.14.0
-chromedriver : 2.43
-geckodriver : 0.23
-IEDriverServer : 3.14.0 Win64
-MicrosoftWebDriver : Release 17134

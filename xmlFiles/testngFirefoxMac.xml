@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MonInter-Desktop" parallel="tests" thread-count="10">
+    <test name="firefox">
+        <parameter name="platform" value="firefox"/>
+        <parameter name="deviceName" value=""/>
+        <parameter name="udid" value=""/>
+        <parameter name="platformVersion" value=""/>
+        <parameter name="os" value="mac"/>
+        <classes>
+            <class name="com.niji.TestFirefox"/>
+        </classes>
+    </test>
+</suite>
